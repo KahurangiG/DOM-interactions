@@ -12,6 +12,9 @@ function bindEventListeners (dots) {
     // BIND YOUR EVENT LISTENERS HERE
     // The first one is provided for you
     dots[i].addEventListener('contextmenu', makeGreen)
+    dots[i].addEventListener('click', makeBlue)
+    dots[i].addEventListener('dbclick', hide)
+    dots[i].addEventListener('dbclick', displayTotals)
   }
 }
 
@@ -23,7 +26,17 @@ function makeGreen (evt) {
 
 // CREATE FUNCTION makeBlue HERE
 
+function makeBlue (evt) {
+  evt.target.classList.toggle('blue')
+  updateCounts()
+}
+
 // CREATE FUNCTION hide HERE
+
+function hide (evt) {
+  evt.target.classList.toggle('invisible')
+  updateCounts()
+}
 
 function updateCounts () {
   var totals = {
@@ -41,5 +54,6 @@ function updateCounts () {
 function displayTotals (totals) {
   for (var key in totals) {
     document.getElementById(key + '-total').innerHTML = totals[key]
+    updateCounts (documents.getElementsByClassName('totals'))
   }
 }
